@@ -1,78 +1,99 @@
-# PoseNet Demos
+# PoseNet デモ
 
-## Contents
+## コンテンツ
 
-### Demo 1: Camera
+### デモ 1: カメラ
 
-The camera demo shows how to estimate poses in real-time from a webcam video stream.
+この「カメラ」アプリケーションは、Webカメラのビデオストリームからリアルタイムな姿勢推定を行うデモです。
 
-<img src="https://raw.githubusercontent.com/irealva/tfjs-models/master/posenet/demos/camera.gif" alt="cameraDemo" style="width: 600px;"/>
-
-
-### Demo 2: Coco Images
-
-The [coco images](http://cocodataset.org/#home) demo shows how to estimate poses in images. It also illustrates the differences between the single-person and multi-person pose detection algorithms.
-
-<img src="https://raw.githubusercontent.com/irealva/tfjs-models/master/posenet/demos/coco.gif" alt="cameraDemo" style="width: 600px;"/>
+![cameraDemo](camera.gif)
 
 
-## Setup
+### デモ 2: Coco 画像データセット
 
-cd into the demos folder:
+[COCO 画像データセット](http://cocodataset.org/#home) アプリケーションは、1枚の写真から姿勢推定を行うデモです。
+下の画像では、1人のみ(single-person)モードと多人数(multi-person)モードの2つの検出アルゴリズムを比較しています。
+
+![cocoDemo](coco.gif)
+
+
+## セットアップ
+
+`demos` フォルダに `cd` します:
 
 ```sh
 cd posenet/demos
 ```
 
-Install dependencies and prepare the build directory:
+依存するモジュールをインストールし、ビルドディレクトリを準備します:
 
 ```sh
 yarn
 ```
 
-To watch files for changes, and launch a dev server:
+- 2019.07 補足: 依存モジュール `fsevents` のインストールに失敗する場合は代わりに `yarn upgrade` を実行する。
+
+
+ファイルの更新を監視するために開発モードでサーバを起動します:
 
 ```sh
 yarn watch
 ```
 
-## If you are developing posenet locally, and want to test the changes in the demos
+## PoseNet をローカルで開発変更をしたい場合
 
-Cd into the posenet folder:
+`demos` によるテスト。
+
+`demposenetos` フォルダに `cd` します:
+
 ```sh
 cd posenet
 ```
 
-Install dependencies:
+依存するモジュールをインストールします:
+
 ```sh
 yarn
 ```
 
-Publish posenet locally:
+ローカルで posenet を利用可能な状態にパブリッシュします:
+
 ```sh
 yarn build && yarn yalc publish
 ```
 
-Cd into the demos and install dependencies:
+`demos` に移動して依存するモジュールをインストールします:
 
 ```sh
 cd demos
 yarn
 ```
 
-Link the local posenet to the demos:
+ローカルでパブリッシュされた posenet のリンクを `demos` に追加します:
+
 ```sh
 yarn yalc link @tensorflow-models/posenet
 ```
 
-Start the dev demo server:
+開発モードでデモのサーバを起動します:
+
 ```sh
 yarn watch
 ```
 
-To get future updates from the posenet source code:
+posenet ソースコードからアップデートを取得するには:
+
 ```
 # cd up into the posenet directory
+
 cd ../
 yarn build && yarn yalc push
 ```
+
+<br>
+
+## 「カメラ」デモアプリの独自拡張
+
+query で `<video>` タグの `src`, `width`, `height` の各属性値を指定すると、カメラが有効でない環境下でも録画済みムービーファイルで試行できるようにした。
+
+URI 例: `http://localhost:1234/camera.html?src=movie.mp4&width=640&height=360`
